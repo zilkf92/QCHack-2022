@@ -17,8 +17,9 @@ class JobApiView(APIView):
         """Creates Job object"""
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            print(request.data)
-            # job = json.loads(request.data)
+            # receives QueryDict
+            job = request.data.dict()
+            print(job)
 
             # runjob(job)
             return Response(
