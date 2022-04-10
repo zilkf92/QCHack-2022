@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
-# Create your views here.
+
+class JobApiView(APIView):
+    """Logic for Job Endpoint"""
+
+    def post(self, request, format=None):
+        """Creates Job object"""
