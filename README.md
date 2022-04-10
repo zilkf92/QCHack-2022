@@ -18,4 +18,4 @@ If one is unfamiliar with how django and gatsby work for Django you have to:
 For Gatsby:
 
 - npm i
-- npm run dev
+- npm run develop
