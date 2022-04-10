@@ -18,10 +18,10 @@ class Job(models.Model):
             MinValueValidator(0),
             MaxValueValidator(1),
         ],
-        decimal_places=2,
+        decimal_places=4,
         max_digits=5,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
     qpu = models.BooleanField(default=False)
     theta = models.DecimalField(
@@ -29,18 +29,18 @@ class Job(models.Model):
             MinValueValidator(0),
             MaxValueValidator(1),
         ],
-        decimal_places=2,
+        decimal_places=4,
         max_digits=5,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
     phi = models.DecimalField(
         validators=[
             MinValueValidator(0),
             MaxValueValidator(1),
         ],
-        decimal_places=2,
+        decimal_places=4,
         max_digits=5,
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )

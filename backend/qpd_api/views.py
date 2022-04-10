@@ -5,7 +5,7 @@ from rest_framework import status
 import json
 
 from qpd_api import serializers
-from qpd_logic import runjob
+from qpd_logic import execute
 
 
 class JobApiView(APIView):
@@ -18,12 +18,13 @@ class JobApiView(APIView):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
             # receives QueryDict
-            job = request.data.dict()
+            print(type(request.data))
+            job = request.data
             print(job)
 
-            # runjob(job)
+            result = execute.run(job)
             return Response(
-                "Job sent.",
+                result,
                 status=status.HTTP_200_OK,
             )
 

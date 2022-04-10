@@ -1,4 +1,3 @@
-# Do the necessary imports
 import numpy as np
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit import IBMQ, Aer, transpile, assemble
@@ -13,6 +12,13 @@ def Jgate(circuit, qreg, gamma):
     circuit.ry(gamma * np.pi / 2, qreg[0])
     circuit.cx(qreg[0], qreg[1])
     circuit.s(qreg[1])
+
+
+def Jdggate(circuit, qreg, gamma):
+
+    circuit.sdg(qreg[1])
+    circuit.cx(qreg[0], qreg[1])
+    circuit.ry(-gamma * np.pi / 2, qreg[0])
 
 
 def Ustrategy(circuit, qreg, qb, theta, phi):
