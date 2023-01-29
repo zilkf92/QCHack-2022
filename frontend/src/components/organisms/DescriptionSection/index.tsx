@@ -1,13 +1,10 @@
-import { Heading, Text, VStack } from "@chakra-ui/react";
-import React from "react";
+import React from 'react'
 
 const DescriptionSection = () => {
   return (
-    <VStack w="6xl">
-      <Heading textAlign="start" fontSize="1.5rem">
-        What is this about?
-      </Heading>
-      <Text>
+    <div className="mx-auto w-8/12">
+      <div className="mb-4 text-start text-2xl">What is this about?</div>
+      <div>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
         labore eum quos quasi enim! Iusto sapiente nobis illo, exercitationem
         impedit sunt ratione, repudiandae nulla modi consectetur aperiam
@@ -18,9 +15,9 @@ const DescriptionSection = () => {
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit minima
         nam, eveniet esse dolor incidunt repellat qui, ab sed est reiciendis!
         Porro deserunt excepturi nam fuga quae maxime hic voluptates?
-      </Text>
-    </VStack>
-  );
-};
+      </div>
+    </div>
+  )
+}
 
-export default DescriptionSection;
+export default DescriptionSection

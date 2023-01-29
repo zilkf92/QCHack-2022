@@ -1,17 +1,16 @@
-import React from "react";
-import { Flex } from "@chakra-ui/react";
+import React from 'react'
 
-import Navbar from "../../molecules/Navbar";
-import Footer from "../../molecules/Footer";
+import Navbar from '../../molecules/Navbar'
+import Footer from '../../molecules/Footer'
 
-const BaseLayout = (props: { children: JSX.Element[] | JSX.Element }) => {
+const BaseLayout = (props: {children: JSX.Element[] | JSX.Element}) => {
   return (
-    <Flex direction="column" justifyContent="center" alignItems="center">
+    <div className="flex-col items-center justify-center">
       <Navbar />
       {props.children}
       <Footer />
-    </Flex>
-  );
-};
+    </div>
+  )
+}
 
-export default BaseLayout;
+export default BaseLayout

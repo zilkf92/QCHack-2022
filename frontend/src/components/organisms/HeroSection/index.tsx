@@ -1,33 +1,28 @@
-import { Button, Flex, Heading, VStack } from "@chakra-ui/react";
-import React from "react";
-import { navigate } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
-import { HeroStyle } from "./style";
+import React from 'react'
+import {useRouter} from 'next/router'
+import Image from 'next/image'
+import bgImage from '../../../images/hero-image.jpg'
+
 
 const HeroSection = () => {
-  return (
-    <Flex
-      justifyContent="center"
-      alignItems="center"
-      w="100%"
-      h="calc(100vh - 100px)"
-      color="white"
-      position="relative"
-      css={HeroStyle()}
-    >
-      <VStack spacing="5">
-        <Heading>Quantum Prisoner's Dilemma</Heading>
-        <Button colorScheme="orange" onClick={() => navigate("/game")}>
-          Play the Game
-        </Button>
-      </VStack>
-      <StaticImage
-        src="../../../images/hero-image.jpg"
-        alt="hero-image"
-        className="image-container"
-      />
-    </Flex>
-  );
-};
+  const router = useRouter()
 
-export default HeroSection;
+  return (
+    <div className="text-white relative flex h-screen w-full items-center justify-center">
+      <div className="flex flex-col space-y-5 justify-center items-center">
+        <div className="text-4xl font-semibold">Quantum Prisoner's Dilemma</div>
+        <button className="bg-orange-500 text-white h-10 rounded w-64" onClick={() => router.push('/game')}>
+          Play the Game
+        </button>
+      </div>
+      <Image
+        className="absolute top-0 left-0 z-[-1] h-fit"
+        src={bgImage}
+        alt="hero-image"
+        fill
+      />
+    </div>
+  )
+}
+
+export default HeroSection

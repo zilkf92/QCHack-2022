@@ -1,11 +1,10 @@
 import React from "react";
-import { VStack, Heading, Text } from "@chakra-ui/react";
 
 const TutorialSection = () => {
   return (
-    <VStack minH="calc(100vh - 100px)" w="6xl">
-      <Heading>So how do I play?</Heading>
-      <Text>
+    <div className="flex-col w-8/12 mx-auto">
+      <h1 className="text-start mb-4 text-xl">So how do I play?</h1>
+      <p> 
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum,
         veritatis dignissimos atque beatae distinctio recusandae doloribus,
         quibusdam quidem, rem sit vitae perferendis qui quod soluta. Eum et
@@ -16,8 +15,8 @@ const TutorialSection = () => {
         consectetur adipisicing elit. Laborum nam laboriosam sint, placeat
         minima ullam odit possimus? Possimus sed porro, vero molestias quibusdam
         non molestiae veniam. Culpa accusamus quos ea.
-      </Text>
-    </VStack>
+      </p>
+    </div>
   );
 };
 

@@ -1,21 +1,22 @@
-import {
-  Box,
-  Button,
-  Flex,
-  FormLabel,
-  HStack,
-  NumberInput,
-  NumberInputField,
-  Radio,
-  RadioGroup,
-  Spacer,
-  Switch,
-  VStack,
-} from "@chakra-ui/react";
-import { StaticImage } from "gatsby-plugin-image";
+import Image from "next/image"
 import React from "react";
-import { GameStyle } from "./style";
-import MathJax from "react-mathjax2";
+
+import {InlineMath, BlockMath} from "react-katex"
+import 'katex/dist/katex.min.css'
+
+import * as Switch from '@radix-ui/react-switch'
+import {Root as Label} from '@radix-ui/react-label'
+import * as RadioGroup from '@radix-ui/react-radio-group'
+
+import {useForm, SubmitHandler} from 'react-hook-form'
+
+import gameImage from '../../../images/game-image.jpg'
+
+
+type ParameterInput = {
+  phi: number
+  theta: number
+}
 
 const GameSection = () => {
   const [qpu, setQpu] = React.useState(false);
@@ -24,7 +25,12 @@ const GameSection = () => {
   const [theta, setTheta] = React.useState(0);
   const [picker, setPicker] = React.useState("simple");
 
-  const handleSubmit = () => {
+
+  const {register, handleSubmit, watch} = useForm<ParameterInput>()
+  const onSubmit: SubmitHandler<ParameterInput> = data => console.log(data)
+
+  
+  const sendRequest = () => {
     fetch(process.env.APIURL || "http://localhost:8080", {
       method: "POST",
       body: JSON.stringify({
@@ -38,126 +44,95 @@ const GameSection = () => {
   };
 
   return (
-    <VStack css={GameStyle()} w="6xl" spacing="10">
-      <StaticImage
-        src="../../../images/game-image.jpg"
+    <div className="flex-col w-8/12 space-y-10 mx-auto justify-between">
+      <Image
+        src={gameImage}
         alt="choices"
-        className="image-container"
       />
-      <Flex w="4xl" alignItems="center">
-        <Flex>
-          <Box mt="-0.5" mr="3">
-            <MathJax.Context input="ascii">
-              <MathJax.Node>gamma</MathJax.Node>
-            </MathJax.Context>
-          </Box>
-          <FormLabel>0</FormLabel>
-          <Switch onChange={() => (gamma === 1 ? setGamma(0) : setGamma(1))} />
-          <FormLabel ml="3">1</FormLabel>
-        </Flex>
-        <Spacer />
-        <MathJax.Context input="ascii">
-          <MathJax.Node>
-            U(theta, phi) = ((e^(i phi) cos(theta/2),
-            sin(theta/2)),(-sin(theta/2), e^(-i phi) cos(theta/2)))
-          </MathJax.Node>
-        </MathJax.Context>
-      </Flex>
-      <VStack spacing="5">
-        <RadioGroup
+      <div className="w-6/12 items-center justify-center">
+        <div className="flex">
+          <div className="mt-[-0.5] mr-3">
+              <InlineMath math="gamma" />
+          </div>
+          <Label htmlFor="gamma">0</Label>
+          <Switch.Root id="gamma" onCheckedChange={() => (gamma === 1 ? setGamma(0) : setGamma(1))}>
+            <Switch.SwitchThumb />  
+          </Switch.Root>
+          <Label htmlFor="gamma" className="ml-3">1</Label>
+        </div>
+          <BlockMath math="U(\theta,\phi) = \begin{pmatrix} e^{i \phi} cos(\theta/2) &
+          sin(\theta/2)\\  -sin(\theta/2) & e^{-i \phi} cos(\theta/2) \end{pmatrix}"/>
+      </div>
+      <div className="flex-col space-y-5">
+        <RadioGroup.Root
           defaultValue="simple"
-          onChange={(value) => setPicker(value)}
+          onValueChange={(value) => setPicker(value)}
         >
-          <HStack spacing="5">
-            <Radio value="simple">Simple Picker</Radio>
-            <Radio value="parameter">Parameter Picker</Radio>
-          </HStack>
-        </RadioGroup>
+          <div className="flex space-x-5">
+            <RadioGroup.Item id="r1" value="simple"><RadioGroup.Indicator /></RadioGroup.Item>
+            <Label htmlFor="r1">Simple Picker</Label>
+            <RadioGroup.Item id="r2" value="parameter"><RadioGroup.Indicator/></RadioGroup.Item>
+            <Label htmlFor="r2">Parameter Picker</Label>
+          </div>
+        </RadioGroup.Root>
         {picker === "simple" ? (
-          <HStack spacing="5">
-            <Button
+          <div className="flex space-x-5">
+            <button
               onClick={() => {
                 setPhi(0);
                 setTheta(0);
               }}
-              colorScheme="orange"
             >
               C
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={() => {
                 setPhi(0);
                 setTheta(1);
               }}
-              colorScheme="orange"
             >
               D
-            </Button>
-            <Button
+            </button>
+            <button
               onClick={() => {
                 setPhi(1);
                 setTheta(0);
               }}
-              colorScheme="orange"
-            >
+             >
               Q
-            </Button>
-          </HStack>
+            </button>
+          </div>
         ) : (
-          <HStack
-            spacing="5"
-            w="6xl"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Flex>
-              <Box mt="2" mr="3">
-                <MathJax.Context input="ascii">
-                  <MathJax.Node>phi</MathJax.Node>
-                </MathJax.Context>
-              </Box>
-              <NumberInput
+          <form className="flex justify-center items-center space-x-5 w-8/12 mx-auto">
+            <div className="flex"> 
+              <div className="mt-2 mr-3">
+                <InlineMath math="\\phi" />
+              </div>
+              <input
                 defaultValue={0}
                 min={0}
                 max={1}
-                precision={2}
-                onChange={(value) => setPhi(parseFloat(value))}
-              >
-                <NumberInputField />
-              </NumberInput>
-            </Flex>
-            <Flex>
-              <Box mt="2" mr="3">
-                <MathJax.Context input="ascii">
-                  <MathJax.Node>theta</MathJax.Node>
-                </MathJax.Context>
-              </Box>
-              <NumberInput
+                type="number"
+              />
+            </div>
+            <div className="flex">
+              <div className="mt-2 mr-3">
+                  <InlineMath math="\\theta" />
+              </div>
+              <input
                 defaultValue={0}
                 min={0}
                 max={1}
-                precision={2}
-                onChange={(value) => setTheta(parseFloat(value))}
-              >
-                <NumberInputField />
-              </NumberInput>
-            </Flex>
-          </HStack>
-        )}
-      </VStack>
-      <RadioGroup
-        defaultValue="sim"
-        onChange={(value) => (value === "sim" ? setQpu(false) : setQpu(true))}
-      >
-        <HStack>
-          <Radio value="sim">Simulator</Radio>
-          <Radio value="qpu">QPU</Radio>
-        </HStack>
-      </RadioGroup>
-      <Button colorScheme="orange" onClick={() => handleSubmit()}>
+                type="number"
+              />
+             </div>
+          </form>
+      )}
+      </div>
+      <button onClick={() => handleSubmit(onSubmit)}>
         Submit
-      </Button>
-    </VStack>
+      </button>
+    </div>
   );
 };
 

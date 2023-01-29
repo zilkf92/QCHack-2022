@@ -3,9 +3,9 @@ import React from "react";
 
 const IntroSection = () => {
   return (
-    <VStack w="6xl">
-      <Heading fontSize="1.5rem">About the game</Heading>
-      <Text>
+    <div className="w-8/12 mx-auto flex-col" >
+      <h1 className="text-xl mb-4">About the game</h1>
+      <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa officiis
         maxime excepturi exercitationem alias quasi impedit totam nobis
         voluptate dignissimos, modi ut amet consequuntur eligendi cupiditate
@@ -16,8 +16,8 @@ const IntroSection = () => {
         consectetur adipisicing elit. Eveniet maiores odit natus debitis quaerat
         officiis incidunt possimus quod nesciunt, nulla expedita dolores
         delectus quam sed iusto? Fugiat architecto ab voluptatibus?
-      </Text>
-    </VStack>
+      </p>
+    </div>
   );
 };
 
