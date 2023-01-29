@@ -16,12 +16,12 @@ class JobApiView(APIView):
     def post(self, request):
         """Creates Job object"""
         serializer = self.serializer_class(data=request.data)
+
         if serializer.is_valid():
             # request.data is type <class 'dict'>
             # print(type(request.data))
             job = request.data
-            # job dict = {'gamma': '1', 'theta': '0', 'phi': '0'}
-            # print(job)
+            # job dict = {"gamma": "0.678", "theta": "0.098", "phi": "0.345"}
 
             result = execute.run(job)
             return Response(

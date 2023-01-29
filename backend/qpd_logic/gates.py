@@ -3,7 +3,7 @@ from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 from qiskit import IBMQ, Aer, transpile, assemble
 from qiskit.visualization import plot_histogram, plot_bloch_multivector, array_to_latex
 from qiskit.extensions import Initialize
-from qiskit.ignis.verification import marginal_counts
+#from qiskit.ignis.verification import marginal_counts
 from qiskit.quantum_info import random_statevector
 
 
@@ -24,5 +24,5 @@ def Jdggate(circuit, qreg, gamma):
 def Ustrategy(circuit, qreg, qb, theta, phi):
 
     circuit.rz(-phi, qreg[qb])
-    circuit.ry(theta, qreg[qb])
+    circuit.ry(-theta, qreg[qb])
     circuit.rz(-phi, qreg[qb])

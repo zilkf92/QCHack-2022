@@ -46,7 +46,8 @@ def play_game(gamma, theta, phi, qpu):
     qc.measure(0, 0)
     qc.measure(1, 1)
 
-    # Logic is currently only working on simulator backend
+    # Logic is currently only implemented for simulator backend
+    # Token needs to be retrieved from FE for QPU access
     if qpu == "true":
 
         # Load IBM Q account and get the least busy backend device
@@ -72,6 +73,7 @@ def play_game(gamma, theta, phi, qpu):
 
     else:
 
+        # Choose noisy quantum circuit simulator as backend
         backend = QasmSimulator()
 
         qc_compiled = transpile(qc, backend)
@@ -80,7 +82,5 @@ def play_game(gamma, theta, phi, qpu):
         result_sim = job_sim.result()
 
         counts = result_sim.get_counts(qc_compiled)
-        print(counts)
-        print(type(counts))
-        # plot_histogram(counts)
+
         return counts

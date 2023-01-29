@@ -1,5 +1,5 @@
 django==4.0.3
 djangorestframework==3.13.1
-qiskit==0.36
+qiskit==0.39
 numpy==1.22.3 
 matplotlib==3.5.1 
